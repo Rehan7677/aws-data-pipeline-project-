@@ -33,7 +33,8 @@ FROM candidate_db.final_final_parquet
 GROUP BY location;
 ```
 
-##Screenshots
+## Screenshots
+
 <img width="1116" height="457" alt="image" src="https://github.com/user-attachments/assets/150e3729-1321-4d0e-a607-d181dbfb59b2" />
 <img width="1111" height="478" alt="image" src="https://github.com/user-attachments/assets/6afc9c6e-5ad1-4c01-a349-22023ab84c9b" />
 <img width="1338" height="341" alt="image" src="https://github.com/user-attachments/assets/dfd1e639-deb1-4d8a-b2c6-1cdee79daf36" />
