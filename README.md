@@ -1,32 +1,31 @@
-# AWS Data Ingestion End-to-End Pipeline
+# AWS Data Pipeline Project (CSV → Parquet → Athena)
 
-## 📌 Project Overview
+## Overview
 
-This project demonstrates an end-to-end data engineering pipeline using AWS services to process candidate application data.
+I built this project to understand how real-world data pipelines work on AWS. The goal was to process candidate data stored in CSV format and make it queryable for analysis.
 
-## 🧱 Architecture
+## What I implemented
 
-* Amazon S3 (Data Lake)
-* AWS Glue (ETL Processing)
-* AWS Glue Crawler (Schema Detection)
-* AWS Athena (Query Engine)
+* Uploaded raw CSV files into S3 (landing layer)
+* Used AWS Glue (PySpark) to convert data into Parquet format
+* Created a cleaned dataset in a final layer
+* Used Glue Crawler to generate schema automatically
+* Queried data using Amazon Athena
 
-## 🔄 Pipeline Flow
+## Challenges I faced
 
-1. Raw CSV files uploaded to S3 (landing layer)
-2. AWS Glue converts CSV → Parquet (staging layer)
-3. Data is cleaned and stored in final layer
-4. Glue Crawler creates metadata tables
-5. Athena used for querying and visualization
+* Glue initially misread CSV headers, creating incorrect column names
+* Fixed this by explicitly defining schema in the ETL job
+* Athena queries didn’t run due to missing output location
+* Resolved by configuring S3 query results path
 
-## ⚙️ Technologies Used
+## Key Learnings
 
-* AWS S3
-* AWS Glue (PySpark)
-* AWS Athena
-* Python
+* Importance of clean schema in data pipelines
+* How Parquet improves query performance
+* Debugging Glue jobs and Athena setup
 
-## 📊 Sample Query
+## Sample Query
 
 ```sql
 SELECT location, COUNT(*) 
@@ -34,18 +33,20 @@ FROM candidate_db.final_final_parquet
 GROUP BY location;
 ```
 
-## 🚀 Key Features
+##Screenshots
+<img width="1116" height="457" alt="image" src="https://github.com/user-attachments/assets/150e3729-1321-4d0e-a607-d181dbfb59b2" />
+<img width="1111" height="478" alt="image" src="https://github.com/user-attachments/assets/6afc9c6e-5ad1-4c01-a349-22023ab84c9b" />
+<img width="1338" height="341" alt="image" src="https://github.com/user-attachments/assets/dfd1e639-deb1-4d8a-b2c6-1cdee79daf36" />
 
-* Scalable data pipeline
-* Schema handling and cleaning
-* Optimized storage using Parquet
-* Serverless querying with Athena
 
-## 📷 Screenshots
-<img width="1238" height="580" alt="image" src="https://github.com/user-attachments/assets/7504a57b-88da-4d52-8878-101163122efa" />
+## Tech Stack
 
-## 📌 Future Improvements
+* AWS S3
+* AWS Glue (PySpark)
+* AWS Athena
 
-* Add partitioning
-* Implement Delta Lake / Iceberg
+## Future Improvements
+
+* Add partitioning for faster queries
 * Automate pipeline using triggers
+* Use Iceberg/Delta in production environment
